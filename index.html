@@ -2,6 +2,23 @@
 <html>
 <head>
 	<title>Stack Snowverflow</title>
+	<script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
+	<!-- <script type="text/javascript" src="bundle.js"/> -->
+	<script type="text/javascript">
+		SE.init({
+			clientId: 5539,
+			key:'hZ9sd3aziJ8Jx6BTf)ltxA((',
+			channelUrl:'http://michaelchance.github.io/stacksnowverflow/blank.html',
+			complete:function(data){
+				console.log(data);
+				SE.authenticate({
+					success: function(data){ console.log('success'); console.log(data); },
+					error: function(data){ console.log('failure'); console.log(data); },
+					networkUsers: true
+					});
+				}
+			});
+	</script>
 </head>
 <body>
 	<h1>Hello Github Pages</h1>
