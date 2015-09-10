@@ -11,10 +11,12 @@
 			channelUrl:'http://michaelchance.github.io/stacksnowverflow/blank.html',
 			complete:function(data){
 				console.log(data);
-				SE.authenticate({
-					success: function(data){ console.log('success'); console.log(data); },
-					error: function(data){ console.log('failure'); console.log(data); },
-					networkUsers: true
+				document.getElementById('login').addEventListener('click',function(){
+					SE.authenticate({
+						success: function(data){ console.log('success'); console.log(data); },
+						error: function(data){ console.log('failure'); console.log(data); },
+						networkUsers: true
+						});
 					});
 				}
 			});
@@ -22,5 +24,6 @@
 </head>
 <body>
 	<h1>Hello Github Pages</h1>
+	<button id="login">Log In</button>
 </body>
 </html>
