@@ -1,0 +1,20 @@
+body{
+	background:#040404 url("img/bg-top.jpg") 50% 0 no-repeat;
+}
+
+.header{
+	background: url("img/bg-sides-2.png") repeat-x scroll center bottom;
+}
+.contentBody{
+	background: #DDDCDA url("img/bg-middle-2.jpg") repeat-x center top;
+	border-bottom: 4px solid #777674;
+	padding-top: 23px;
+}
+.footer{
+	background:#040404 url("img/bg-top.jpg") 50% 70% no-repeat;
+}
+
+.contentContainer{
+	width: 990px;
+	margin: 0px auto;
+}

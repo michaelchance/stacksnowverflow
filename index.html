@@ -2,28 +2,37 @@
 <html>
 <head>
 	<title>Stack Snowverflow</title>
+	<link rel="stylesheet" href="styles.css"/>
 	<script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
-	<!-- <script type="text/javascript" src="bundle.js"/> -->
 	<script type="text/javascript">
-		SE.init({
-			clientId: 5539,
-			key:'hZ9sd3aziJ8Jx6BTf)ltxA((',
-			channelUrl:'http://michaelchance.github.io/stacksnowverflow/blank.html',
-			complete:function(data){
-				console.log(data);
-				document.getElementById('login').addEventListener('click',function(){
-					SE.authenticate({
-						success: function(data){ console.log('success'); console.log(data); },
-						error: function(data){ console.log('failure'); console.log(data); },
-						networkUsers: true
-						});
-					});
-				}
-			});
+		var clientId = 5539;
+		var key = 'hZ9sd3aziJ8Jx6BTf)ltxA((';
+		var channelUrl = 'http://michaelchance.github.io/stacksnowverflow/blank.html';
+		//if(window.location.host == 'localhost'){
+		//	clientId = 5540;
+		//	key = '*ECQ1vskbGqWbv9V2c*miA((';
+		//	channelUrl = 'http://localhost:3000/blank.html';
+		//	}
+		
+		//SE.init({
+		//	clientId: clientId,
+		//	key:key,
+		//	channelUrl:channelUrl,
+		//	complete:function(data){
+		//		console.log(data);
+		//		document.getElementById('login').addEventListener('click',function(){
+		//			SE.authenticate({
+		//				success: function(data){ console.log('success'); console.log(data); },
+		//				error: function(data){ console.log('failure'); console.log(data); },
+		//				networkUsers: true
+		//				});
+		//			});
+		//		}
+		//	});
 	</script>
 </head>
 <body>
-	<h1>Hello Github Pages</h1>
-	<button id="login">Log In</button>
+	<div id="root"></div>
+	<script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>
