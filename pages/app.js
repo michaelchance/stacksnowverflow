@@ -2,27 +2,29 @@ import React, { Component, PropTypes, findDOMNode } from 'react';
 import {connect} from 'react-redux';
 import get from 'lodash/object/get';
 
+import {History} from 'react-router';
+console.log(History);
 import {loadDataFromApi} from '../actions.js';
 
-class App extends Component {
-	constructor(props){
-		super(props);
-		this.execSearch = this.execSearch.bind(this);
-		}
+var App = React.createClass({
+	
+	mixins : [History],
 	loadData(props){
 		props.loadDataFromApi({endpoint:'questions'});
-		}
+		},
 	componentWillMount(){
 		this.loadData(this.props);
-		}
+		},
 	componentWillReceiveProps(nextProps){
 		this.loadData(nextProps);
-		}
+		},
 		
 	execSearch(){
 		console.log('EXEC SEARCH '+findDOMNode(this.refs.search).value);
-		this.context.router.transitionTo('/search?q='+findDOMNode(this.refs.search).value);
-		}	
+		console.log(this);
+		// this.context.router.transitionTo('/search?q='+findDOMNode(this.refs.search).value);
+		this.history.pushState({},'/search?q='+findDOMNode(this.refs.search).value);
+		},	
 		
 	render (){
 		const {location,children} = this.props;
@@ -51,12 +53,19 @@ class App extends Component {
 				</div>
 			</div>
 			);
-		}
-	}
+		},
+	});
 
-App.contextTypes = {
-	router : PropTypes.object.isRequired
-}
+// class App extends Component {
+	// constructor(props){
+		// super(props);
+		// this.execSearch = this.execSearch.bind(this);
+		// }
+	// }
+
+// App.contextTypes = {
+	// router : PropTypes.object.isRequired
+// }
 
 export default connect(
 	function(state){ return {
