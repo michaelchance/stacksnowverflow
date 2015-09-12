@@ -1259,7 +1259,7 @@
 
 		return function (dispatch, getState) {
 			var data = getState().data[datapointer];
-			if (data && data.expires > new Date().getTime()) {
+			if (data && data.expires && data.expires > new Date().getTime()) {
 				return null;
 			} else if (data && data.error_id) {
 				console.warn(data);

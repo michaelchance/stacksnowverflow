@@ -10,7 +10,7 @@ export function loadDataFromApi(options){
 	const {datapointer=endpoint} = options
 	return (dispatch, getState) => {
 		const data = getState().data[datapointer]
-		if(data && data.expires > new Date().getTime()){
+		if(data && typeof data.expires !== "undefined" && data.expires > new Date().getTime()){
 			return null;
 			}
 		else if(data && data.error_id){
