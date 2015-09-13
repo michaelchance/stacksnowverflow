@@ -72,7 +72,7 @@ export default store => next => action => {
 		
 		fullUrl += "site=www.stackoverflow.com";
 		
-		const {access_token} = store.getState();
+		const {access_token} = store.getState().user;
 		if(access_token){ fullUrl += "&access_token="+access_token; }
 		
 		fullUrl += "&key="+key;

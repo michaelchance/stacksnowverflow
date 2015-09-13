@@ -20,7 +20,7 @@ import TagListingPage from './pages/taglisting.js';
 import TagDetailPage from './pages/tagdetail.js';
 
 // const history = new HashHistory();
-const initialState = {version:"201509130917"};
+const initialState = {version:"201509130919"};
 
 const store = applyMiddleware(
 	thunkMiddleware,

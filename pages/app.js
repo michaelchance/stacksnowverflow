@@ -109,7 +109,7 @@ export default connect(
 			version,
 			access_token
 			};
-		if(me && !me.IS_LOADING){
+		if(me && me.items && me.items.length > 0){
 			r.me = me.items[0]
 			}
 		return r;

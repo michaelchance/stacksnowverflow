@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130917" };
+	var initialState = { version: "201509130919" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -907,9 +907,7 @@
 
 						fullUrl += "site=www.stackoverflow.com";
 
-						var _store$getState = store.getState();
-
-						var access_token = _store$getState.access_token;
+						var access_token = store.getState().user.access_token;
 
 						if (access_token) {
 							fullUrl += "&access_token=" + access_token;
@@ -27616,7 +27614,7 @@
 			version: version,
 			access_token: access_token
 		};
-		if (me && !me.IS_LOADING) {
+		if (me && me.items && me.items.length > 0) {
 			r.me = me.items[0];
 		}
 		return r;
