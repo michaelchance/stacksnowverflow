@@ -3,7 +3,10 @@ import {combineReducers} from 'redux';
 
 function data(state={}, action){
 	const {type} = action;
-	if(type === ActionTypes.EXPIRE_DATA){
+	if(type === ActionTypes.EXPIRE_DATA ||
+		type === ActionTypes.AUTH_COMPLETE ||
+		type === ActionTypes.LOGOUT){
+		
 		const {datapointer} = action;
 		let merge = {};
 		if(datapointer && state[datapointer]){

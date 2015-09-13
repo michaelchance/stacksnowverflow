@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130921" };
+	var initialState = { version: "201509130925" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -1605,7 +1605,7 @@
 		if (state === undefined) state = {};
 		var type = action.type;
 
-		if (type === ActionTypes.EXPIRE_DATA) {
+		if (type === ActionTypes.EXPIRE_DATA || type === ActionTypes.AUTH_COMPLETE || type === ActionTypes.LOGOUT) {
 			(function () {
 				var datapointer = action.datapointer;
 
