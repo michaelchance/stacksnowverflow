@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130915" };
+	var initialState = { version: "201509130917" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -27616,7 +27616,7 @@
 			version: version,
 			access_token: access_token
 		};
-		if (me) {
+		if (me && !me.IS_LOADING) {
 			r.me = me.items[0];
 		}
 		return r;
