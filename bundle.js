@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130929" };
+	var initialState = { version: "201509130931" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -1608,17 +1608,23 @@
 		var type = action.type;
 
 		if (type === ActionTypes.EXPIRE_DATA || type === ActionTypes.AUTH_COMPLETE || type === ActionTypes.LOGOUT) {
+			var _ret = (function () {
 
-			merge = Object.assign({}, state);
-			Object.getOwnPropertyNames(merge).forEach(function (val, idx, array) {
-				if (merge[val].auth) {
-					delete merge[val];
-					delete state[val];
-				} else {
-					merge[val].expires = 0;
-				}
-			});
-			return Object.assign({}, state, merge);
+				var merge = Object.assign({}, state);
+				Object.getOwnPropertyNames(merge).forEach(function (val, idx, array) {
+					if (merge[val].auth) {
+						delete merge[val];
+						delete state[val];
+					} else {
+						merge[val].expires = 0;
+					}
+				});
+				return {
+					v: Object.assign({}, state, merge)
+				};
+			})();
+
+			if (typeof _ret === 'object') return _ret.v;
 		} else if (type === ActionTypes.API_REQUEST) {
 			var endpoint = action.endpoint;
 			var _action$datapointer = action.datapointer;

@@ -7,7 +7,7 @@ function data(state={}, action){
 		type === ActionTypes.AUTH_COMPLETE ||
 		type === ActionTypes.LOGOUT){
 		
-		merge = Object.assign({},state);
+		let merge = Object.assign({},state);
 		Object.getOwnPropertyNames(merge).forEach(function(val, idx, array) {
 			if(merge[val].auth){
 				delete merge[val]
