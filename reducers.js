@@ -34,7 +34,9 @@ function data(state={}, action){
 			}
 		else {
 			let {response} = action;
+			const {auth} = action;
 			response.expires = new Date().getTime() + expiresMinutes*60*1000;
+			response.auth = auth;
 			return Object.assign({},state,{[datapointer]:response});
 			}
 		}

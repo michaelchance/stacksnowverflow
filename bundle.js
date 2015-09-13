@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130931" };
+	var initialState = { version: "201509130935" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -1645,8 +1645,10 @@
 				return Object.assign({}, state, _defineProperty({}, datapointer, error));
 			} else {
 				var response = action.response;
+				var auth = action.auth;
 
 				response.expires = new Date().getTime() + expiresMinutes * 60 * 1000;
+				response.auth = auth;
 				return Object.assign({}, state, _defineProperty({}, datapointer, response));
 			}
 		}
