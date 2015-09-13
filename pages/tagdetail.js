@@ -6,7 +6,7 @@ import {Link,History} from 'react-router';
 
 import {loadDataFromApi} from '../actions.js';
 
-var QuestionPage = React.createClass({
+var TagDetailPage = React.createClass({
 	getInitialState : function(){
 		return {page:1};
 		},
@@ -32,6 +32,6 @@ export default connect(
 		return {};
 		},
 	{ loadDataFromApi }
-	)(QuestionPage);
+	)(TagDetailPage);
 	
 
