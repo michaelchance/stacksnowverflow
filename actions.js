@@ -8,7 +8,7 @@ export function loadDataFromApi(options){
 	const {datapointer=endpoint, forceExpire, auth} = options
 	return (dispatch, getState) => {
 		const data = getState().data[datapointer]
-		const access_token = getState().access_token;
+		const access_token = getState().user.access_token;
 		if(auth && !access_token){
 			return null;
 			}

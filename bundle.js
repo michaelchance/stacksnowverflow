@@ -1334,7 +1334,7 @@
 
 		return function (dispatch, getState) {
 			var data = getState().data[datapointer];
-			var access_token = getState().access_token;
+			var access_token = getState().user.access_token;
 			if (auth && !access_token) {
 				return null;
 			}
