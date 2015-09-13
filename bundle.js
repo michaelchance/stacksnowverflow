@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130908" };
+	var initialState = { version: "201509130912" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -1659,8 +1659,7 @@
 		if (type === ActionTypes.AUTH_REQUEST) {
 			return {};
 		} else if (type === ActionTypes.AUTH_COMPLETE) {
-			var access_token = action.access_token;
-
+			var access_token = action.accessToken;
 			return { access_token: access_token };
 		} else if (type === ActionTypes.LOGOUT || type === ActionTypes.AUTH_ERROR) {
 			return {};

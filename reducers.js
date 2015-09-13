@@ -48,7 +48,7 @@ function user(state={}, action){
 		return {};
 		}
 	else if(type === ActionTypes.AUTH_COMPLETE){
-		const {access_token} = action;
+		const access_token = action.accessToken;
 		return {access_token};
 		}
 	else if(type === ActionTypes.LOGOUT || type === ActionTypes.AUTH_ERROR){
