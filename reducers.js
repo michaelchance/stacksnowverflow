@@ -3,12 +3,29 @@ import {combineReducers} from 'redux';
 
 function data(state={}, action){
 	const {type} = action;
-	if(type === ActionTypes.API_REQUEST){
+	if(type === ActionTypes.EXPIRE_DATA){
+		const {datapointer} = action;
+		let merge = {};
+		if(datapointer && state[datapointer]){
+			merge[datapointer] = Object.assign({},state[datapointer]);
+			merge[datapointer].expires = 0;
+			}
+		else if(!datapointer){
+			merge = Object.assign({},state);
+			Object.getOwnPropertyNames(merge).forEach(function(val, idx, array) {
+				merge[val].expires = 0;
+				});
+			}
+		else {
+			//datapointer provided, but no data existed.  Do nothing
+			}
+		}
+	else if(type === ActionTypes.API_REQUEST){
 		const {endpoint} = action;
 		const { datapointer=endpoint } = action;
 		return Object.assign({},state,{[datapointer]:{IS_LOADING:true}});
 		}
-	if(type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR){
+	else if(type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR){
 		const {endpoint} = action;
 		const { expiresMinutes = 60, datapointer=endpoint} = action;
 		if(type === ActionTypes.API_ERROR){
@@ -25,8 +42,24 @@ function data(state={}, action){
 	return state;
 	}
 
+function user(state={}, action){
+	const {type} = action;
+	if(type === ActionTypes.AUTH_REQUEST){
+		return {};
+		}
+	else if(type === ActionTypes.AUTH_COMPLETE){
+		const {access_token, account_id} = action;
+		return {access_token, account_id};
+		}
+	else if(type === ActionTypes.LOGOUT || type === ActionTypes.AUTH_ERROR){
+		return {};
+		}
+	return state;
+	}
+
 const rootReducer = combineReducers({
-	data
+	data,
+	user
 	});
 
 export default rootReducer;

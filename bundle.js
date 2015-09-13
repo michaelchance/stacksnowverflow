@@ -833,12 +833,57 @@
 
 	var API_ROOT = 'https://api.stackexchange.com/';
 
+	var clientId = 5539;
+	var key = 'hZ9sd3aziJ8Jx6BTf)ltxA((';
+	var channelUrl = 'http://michaelchance.github.io/stacksnowverflow/blank.html';
+	if (window.location.hostname == 'localhost') {
+		clientId = 5540;
+		key = '*ECQ1vskbGqWbv9V2c*miA((';
+		channelUrl = 'http://localhost:3000/blank.html';
+	}
+
+	var initPromise = new Promise(function (resolve, reject) {
+		window.SE.init({
+			clientId: clientId,
+			key: key,
+			channelUrl: channelUrl,
+			complete: function complete(data) {
+				resolve(data);
+			}
+		});
+	});
+
+	//		document.getElementById('login').addEventListener('click',function(){
+	//			SE.authenticate({
+	//				success: function(data){ console.log('success'); console.log(data); },
+	//				error: function(data){ console.log('failure'); console.log(data); },
+	//				networkUsers: true
+	//				});
+	//			});
+
 	exports['default'] = function (store) {
 		return function (next) {
 			return function (action) {
-				if (action.type !== ActionTypes.API_REQUEST) {
-					return next(action);
-				} else {
+				if (action.type === ActionTypes.AUTH_REQUEST) {
+					return initPromise.then(function () {
+						return new Promise(function (resolve, reject) {
+							SE.authenticate({
+								success: function success(data) {
+									resolve(data);
+								},
+								error: function error(data) {
+									reject(data);
+								}
+							});
+						});
+					}).then(function (response) {
+						response.type = ActionTypes.AUTH_COMPLETE;
+						return next(response);
+					}, function (error) {
+						error.type = ActionTypes.AUTH_ERROR;
+						return next(error);
+					});
+				} else if (action.type === ActionTypes.API_REQUEST) {
 					var _ret = (function () {
 						//assert(action.type === ActionTypes.API_REQUEST);
 						var endpoint = action.endpoint;
@@ -867,8 +912,10 @@
 						var access_token = _store$getState.access_token;
 
 						if (access_token) {
-							fullurl += "&access_token=" + access_token;
+							fullUrl += "&access_token=" + access_token;
 						}
+
+						fullUrl += "&key=" + key;
 
 						return {
 							v: fetch(fullUrl).then(function (response) {
@@ -893,6 +940,8 @@
 					})();
 
 					if (typeof _ret === 'object') return _ret.v;
+				} else {
+					return next(action);
 				}
 			};
 		};
@@ -1263,6 +1312,9 @@
 		value: true
 	});
 	exports.loadDataFromApi = loadDataFromApi;
+	exports.login = login;
+	exports.logout = logout;
+	exports.expireData = expireData;
 	var API_REQUEST = "API_REQUEST";
 	exports.API_REQUEST = API_REQUEST;
 	var API_RESPONSE = "API_RESPONSE";
@@ -1278,15 +1330,20 @@
 		var _options$datapointer = options.datapointer;
 		var datapointer = _options$datapointer === undefined ? endpoint : _options$datapointer;
 		var forceExpire = options.forceExpire;
+		var auth = options.auth;
 
 		return function (dispatch, getState) {
 			var data = getState().data[datapointer];
+			var access_token = getState().access_token;
+			if (auth && !access_token) {
+				return null;
+			}
 			if (data && typeof data.expires !== "undefined" && !forceExpire && data.expires > new Date().getTime()) {
+				return null;
+			} else if (data && data.IS_LOADING) {
 				return null;
 			} else if (data && data.error_id) {
 				console.warn(data);
-				return null;
-			} else if (data && data.IS_LOADING) {
 				return null;
 			} else {
 				return dispatch({
@@ -1296,6 +1353,39 @@
 					datapointer: datapointer
 				});
 			}
+		};
+	}
+
+	var AUTH_REQUEST = "AUTH_REQUEST";
+	exports.AUTH_REQUEST = AUTH_REQUEST;
+	var AUTH_COMPLETE = "AUTH_COMPLETE";
+	exports.AUTH_COMPLETE = AUTH_COMPLETE;
+	var AUTH_ERROR = "AUTH_ERROR";
+
+	exports.AUTH_ERROR = AUTH_ERROR;
+
+	function login() {
+		return { type: AUTH_REQUEST };
+	}
+
+	var LOGOUT = "LOGOUT";
+
+	exports.LOGOUT = LOGOUT;
+
+	function logout() {
+		return { type: LOGOUT };
+	}
+
+	var EXPIRE_DATA = "EXPIRE_DATA";
+
+	exports.EXPIRE_DATA = EXPIRE_DATA;
+
+	function expireData(options) {
+		var datapointer = options.datapointer;
+
+		return {
+			type: EXPIRE_DATA,
+			datapointer: datapointer
 		};
 	}
 
@@ -1517,37 +1607,71 @@
 		if (state === undefined) state = {};
 		var type = action.type;
 
-		if (type === ActionTypes.API_REQUEST) {
-			var endpoint = action.endpoint;
-			var _action$datapointer = action.datapointer;
-			var datapointer = _action$datapointer === undefined ? endpoint : _action$datapointer;
+		if (type === ActionTypes.EXPIRE_DATA) {
+			(function () {
+				var datapointer = action.datapointer;
 
-			return Object.assign({}, state, _defineProperty({}, datapointer, { IS_LOADING: true }));
-		}
-		if (type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR) {
-			var endpoint = action.endpoint;
-			var _action$expiresMinutes = action.expiresMinutes;
-			var expiresMinutes = _action$expiresMinutes === undefined ? 60 : _action$expiresMinutes;
-			var _action$datapointer2 = action.datapointer;
-			var datapointer = _action$datapointer2 === undefined ? endpoint : _action$datapointer2;
+				var merge = {};
+				if (datapointer && state[datapointer]) {
+					merge[datapointer] = Object.assign({}, state[datapointer]);
+					merge[datapointer].expires = 0;
+				} else if (!datapointer) {
+					merge = Object.assign({}, state);
+					Object.getOwnPropertyNames(merge).forEach(function (val, idx, array) {
+						merge[val].expires = 0;
+					});
+				} else {
+					//datapointer provided, but no data existed.  Do nothing
+				}
+			})();
+		} else if (type === ActionTypes.API_REQUEST) {
+				var endpoint = action.endpoint;
+				var _action$datapointer = action.datapointer;
+				var datapointer = _action$datapointer === undefined ? endpoint : _action$datapointer;
 
-			if (type === ActionTypes.API_ERROR) {
-				var error = action.error;
+				return Object.assign({}, state, _defineProperty({}, datapointer, { IS_LOADING: true }));
+			} else if (type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR) {
+				var endpoint = action.endpoint;
+				var _action$expiresMinutes = action.expiresMinutes;
+				var expiresMinutes = _action$expiresMinutes === undefined ? 60 : _action$expiresMinutes;
+				var _action$datapointer2 = action.datapointer;
+				var datapointer = _action$datapointer2 === undefined ? endpoint : _action$datapointer2;
 
-				error.expires = 0; //auto expire an error'd request, but put it in the state for display purposes
-				return Object.assign({}, state, _defineProperty({}, datapointer, error));
-			} else {
-				var response = action.response;
+				if (type === ActionTypes.API_ERROR) {
+					var error = action.error;
 
-				response.expires = new Date().getTime() + expiresMinutes * 60 * 1000;
-				return Object.assign({}, state, _defineProperty({}, datapointer, response));
+					error.expires = 0; //auto expire an error'd request, but put it in the state for display purposes
+					return Object.assign({}, state, _defineProperty({}, datapointer, error));
+				} else {
+					var response = action.response;
+
+					response.expires = new Date().getTime() + expiresMinutes * 60 * 1000;
+					return Object.assign({}, state, _defineProperty({}, datapointer, response));
+				}
 			}
+		return state;
+	}
+
+	function user(state, action) {
+		if (state === undefined) state = {};
+		var type = action.type;
+
+		if (type === ActionTypes.AUTH_REQUEST) {
+			return {};
+		} else if (type === ActionTypes.AUTH_COMPLETE) {
+			var access_token = action.access_token;
+			var account_id = action.account_id;
+
+			return { access_token: access_token, account_id: account_id };
+		} else if (type === ActionTypes.LOGOUT || type === ActionTypes.AUTH_ERROR) {
+			return {};
 		}
 		return state;
 	}
 
 	var rootReducer = (0, _redux.combineReducers)({
-		data: data
+		data: data,
+		user: user
 	});
 
 	exports['default'] = rootReducer;
@@ -27324,7 +27448,10 @@
 
 		mixins: [_reactRouter.History],
 		loadData: function loadData(props) {
-			//props.loadDataFromApi({endpoint:'questions'});
+			props.loadDataFromApi({
+				endpoint: "me",
+				auth: true
+			});
 		},
 		componentWillMount: function componentWillMount() {
 			this.loadData(this.props);
@@ -27340,7 +27467,18 @@
 			(0, _react.findDOMNode)(this.refs.headerSearchInput).blur();
 		},
 
+		login: function login() {
+			this.props.login();
+			return false;
+		},
+		logout: function logout() {
+			this.props.logout();
+			return false;
+		},
+
 		render: function render() {
+			var _this = this;
+
 			var _props = this.props;
 			var location = _props.location;
 			var children = _props.children;
@@ -27350,8 +27488,39 @@
 				null,
 				_react2['default'].createElement(
 					'div',
-					{ className: 'navBar' },
-					_react2['default'].createElement('div', { className: 'contentContainer' })
+					{ id: 'navBar' },
+					_react2['default'].createElement(
+						'div',
+						{ className: 'contentContainer' },
+						(function () {
+							if (_this.props.me) {
+								return _react2['default'].createElement(
+									'span',
+									{ className: 'floatRight' },
+									_react2['default'].createElement(
+										_reactRouter.Link,
+										{ to: '/profile' },
+										_this.props.me
+									),
+									_react2['default'].createElement(
+										_reactRouter.Link,
+										{ to: '/', onClick: _this.logout },
+										'Log Out'
+									)
+								);
+							} else {
+								return _react2['default'].createElement(
+									'span',
+									{ className: 'floatRight' },
+									_react2['default'].createElement(
+										_reactRouter.Link,
+										{ to: '/', onClick: _this.login },
+										'Log In'
+									)
+								);
+							}
+						})()
+					)
 				),
 				_react2['default'].createElement(
 					'div',
@@ -27429,22 +27598,18 @@
 		}
 	});
 
-	// class App extends Component {
-	// constructor(props){
-	// super(props);
-	// this.execSearch = this.execSearch.bind(this);
-	// }
-	// }
-
-	// App.contextTypes = {
-	// router : PropTypes.object.isRequired
-	// }
-
 	exports['default'] = (0, _reactRedux.connect)(function (state) {
-		return {
-			//data : state.data.questions
+		var access_token = state.user.access_token;
+		var me = state.data.me;
+
+		var r = {
+			access_token: access_token
 		};
-	}, { loadDataFromApi: _actionsJs.loadDataFromApi })(App);
+		if (me) {
+			r.me = me.items[0];
+		}
+		return r;
+	}, { loadDataFromApi: _actionsJs.loadDataFromApi, login: _actionsJs.login, logout: _actionsJs.logout })(App);
 	module.exports = exports['default'];
 
 /***/ },

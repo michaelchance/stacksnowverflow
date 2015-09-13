@@ -4,13 +4,16 @@ import get from 'lodash/object/get';
 
 import {Link, IndexLink, History} from 'react-router';
 console.log(History);
-import {loadDataFromApi} from '../actions.js';
+import {loadDataFromApi,logout,login} from '../actions.js';
 
 var App = React.createClass({
 	
 	mixins : [History],
 	loadData(props){
-		//props.loadDataFromApi({endpoint:'questions'});
+		props.loadDataFromApi({
+			endpoint:"me",
+			auth:true
+			})
 		},
 	componentWillMount(){
 		this.loadData(this.props);
@@ -25,14 +28,39 @@ var App = React.createClass({
 		// console.log(findDOMNode(this.refs.headerSearchInput));
 		findDOMNode(this.refs.headerSearchInput).blur();
 		},	
-		
+
+	login(){
+		this.props.login();
+		return false;
+		},
+	logout(){
+		this.props.logout();
+		return false;
+		},
+	
 	render (){
 		const {location,children} = this.props;
 		return (
 			<div>
-				<div className="navBar">
+				<div id="navBar">
 					<div className="contentContainer">
-					
+						{()=>{
+							if(this.props.me){
+								return (
+									<span className="floatRight">
+										<Link to="/profile">{this.props.me}</Link>
+										<Link to="/" onClick={this.logout}>Log Out</Link>
+									</span>
+									);
+								}
+							else{
+								return (
+									<span className="floatRight">
+										<Link to="/" onClick={this.login}>Log In</Link>
+									</span>
+									);
+								}
+							}()}
 					</div>
 				</div>
 				<div id="header">
@@ -71,22 +99,20 @@ var App = React.createClass({
 		},
 	});
 
-// class App extends Component {
-	// constructor(props){
-		// super(props);
-		// this.execSearch = this.execSearch.bind(this);
-		// }
-	// }
-
-// App.contextTypes = {
-	// router : PropTypes.object.isRequired
-// }
 
 export default connect(
-	function(state){ return {
-		//data : state.data.questions
-		}; },
-	{ loadDataFromApi }
+	function(state){ 
+		const {access_token} = state.user;
+		const {me} = state.data;
+		let r = {
+			access_token,
+			};
+		if(me){
+			r.me = me.items[0]
+			}
+		return r;
+		},
+	{ loadDataFromApi,login,logout }
 	)(App);
 	
 
