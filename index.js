@@ -14,6 +14,7 @@ import createHashHistory from 'history/lib/createHashHistory';
 
 import App from './pages/app.js';
 import SearchPage from './pages/search.js';
+import QuestionPage from './pages/question.js';
 
 // const history = new HashHistory();
 const initialState = {};
@@ -32,13 +33,13 @@ React.render(
 			<Router history={createHashHistory()}>
 				<Route path="/" component={App}>
 					<Route path="/search" component={SearchPage}/>
+					<Route path="/question/:id" component={QuestionPage}/>
 				</Route>
 			</Router>
 		}
 	</Provider>,
 	document.getElementById('root'));
 /*
-					<Route path="/question/:id" component={QuestionPage}/>
 					<Route path="/profile" component={ProfilePage}/>
 					<Route path="/profile/badges" component={ProfileBadgesPage}/>
 					<Route path="/profile/favorites" component={ProfileFavoritesPage}/>

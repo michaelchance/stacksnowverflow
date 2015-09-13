@@ -1,5 +1,7 @@
 body{
 	background:#040404 url("img/bg-top.jpg") 50% 0 no-repeat;
+	padding:0px;
+	margin:0px;
 }
 
 .header{
@@ -9,6 +11,7 @@ body{
 	background: #DDDCDA url("img/bg-middle-2.jpg") repeat-x center top;
 	border-bottom: 4px solid #777674;
 	padding-top: 23px;
+	overflow-x:hidden;
 }
 .footer{
 	background:#040404 url("img/bg-top.jpg") 50% 70% no-repeat;

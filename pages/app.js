@@ -23,7 +23,7 @@ var App = React.createClass({
 		console.log('EXEC SEARCH '+findDOMNode(this.refs.search).value);
 		console.log(this);
 		// this.context.router.transitionTo('/search?q='+findDOMNode(this.refs.search).value);
-		this.history.pushState({},'/search?q='+findDOMNode(this.refs.search).value);
+		this.history.pushState({},'/search?q='+encodeURIComponent(findDOMNode(this.refs.search).value));
 		},	
 		
 	render (){

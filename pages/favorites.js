@@ -2,8 +2,6 @@ import React, { Component, PropTypes, findDOMNode } from 'react';
 import {connect} from 'react-redux';
 import get from 'lodash/object/get';
 
-import {Link} from 'react-router';
-
 import {loadDataFromApi} from '../actions.js';
 
 var SearchPage = React.createClass({
@@ -36,11 +34,9 @@ var SearchPage = React.createClass({
 	onEnter(){
 		console.log('SEARCH ONENTER');
 		},
-	renderQuestion(itemObj){
+	renderItem(itemObj){
 		return (
-			<h1>
-				<Link to={`/question/${itemObj.question_id}`} dangerouslySetInnerHTML={()=>{return {__html:itemObj.title};}()}></Link>
-			</h1>
+			<h1><Link to="/question"{itemObj.title}</h1>
 			)
 		},
 	componentWillReceiveProps(nextProps){
@@ -58,18 +54,15 @@ var SearchPage = React.createClass({
 					<option value="votes">Score</option>
 				</select>
 				<div>
-					{()=>{ return "FOO"; }()}
-				</div>
-				<div>
 					{()=>{
-						const items = get(this.props, 'data.items');
+						const items = get(this.props, 'items');
 						if(items){
-							return items.map(this.renderQuestion);
+							return items.map(this.renderItem);
 							}
 						else {
 							return "Loading...";
 							}
-					}()}
+					}}
 				</div>
 				<div>{JSON.stringify(this.props.data)}</div>
 			</div>
@@ -94,7 +87,7 @@ export default connect(
 		const q = encodeURIComponent(get(ownProps, "location.query.q"));
 		if(q){
 			return {
-				data : state.data['search|'+q]
+				data : state.data['search|'+ownProps.location.query.q]
 				}; 
 			}
 		return {};

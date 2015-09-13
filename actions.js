@@ -7,10 +7,10 @@ export const API_ERROR = "API_ERROR";
 //Require redux-thunk middleware
 export function loadDataFromApi(options){
 	const {endpoint, expiresMinutes} = options
-	const {datapointer=endpoint} = options
+	const {datapointer=endpoint, forceExpire} = options
 	return (dispatch, getState) => {
 		const data = getState().data[datapointer]
-		if(data && typeof data.expires !== "undefined" && data.expires > new Date().getTime()){
+		if(data && typeof data.expires !== "undefined" && !forceExpire && data.expires > new Date().getTime()){
 			return null;
 			}
 		else if(data && data.error_id){
