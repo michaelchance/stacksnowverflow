@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130919" };
+	var initialState = { version: "201509130921" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -27503,7 +27503,7 @@
 									_react2['default'].createElement(
 										_reactRouter.Link,
 										{ to: '/profile' },
-										_this.props.me
+										_this.props.me.display_name
 									),
 									_react2['default'].createElement(
 										_reactRouter.Link,

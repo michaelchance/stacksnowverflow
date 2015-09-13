@@ -48,7 +48,7 @@ var App = React.createClass({
 							if(this.props.me){
 								return (
 									<span className="floatRight">
-										<Link to="/profile">{this.props.me}</Link>
+										<Link to="/profile">{this.props.me.display_name}</Link>
 										<Link to="/" onClick={this.logout}>Log Out</Link>
 									</span>
 									);
