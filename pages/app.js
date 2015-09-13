@@ -88,7 +88,7 @@ var App = React.createClass({
 				</div>
 				<div id="footer">
 					<div className="contentContainer">
-					
+					{this.props.version}
 					</div>
 				</div>
 			</div>
@@ -102,10 +102,12 @@ var App = React.createClass({
 
 export default connect(
 	function(state){ 
+		const {version} = state;
 		const {access_token} = state.user;
 		const {me} = state.data;
 		let r = {
-			access_token,
+			version,
+			access_token
 			};
 		if(me){
 			r.me = me.items[0]

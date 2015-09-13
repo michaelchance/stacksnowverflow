@@ -57,9 +57,14 @@ function user(state={}, action){
 	return state;
 	}
 
+function version(state="0",action){
+	return state;
+	}
+
 const rootReducer = combineReducers({
 	data,
-	user
+	user,
+	version
 	});
 
 export default rootReducer;

@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = {};
+	var initialState = { version: "201509130908" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -1660,18 +1660,24 @@
 			return {};
 		} else if (type === ActionTypes.AUTH_COMPLETE) {
 			var access_token = action.access_token;
-			var account_id = action.account_id;
 
-			return { access_token: access_token, account_id: account_id };
+			return { access_token: access_token };
 		} else if (type === ActionTypes.LOGOUT || type === ActionTypes.AUTH_ERROR) {
 			return {};
 		}
 		return state;
 	}
 
+	function version(state, action) {
+		if (state === undefined) state = "0";
+
+		return state;
+	}
+
 	var rootReducer = (0, _redux.combineReducers)({
 		data: data,
-		user: user
+		user: user,
+		version: version
 	});
 
 	exports['default'] = rootReducer;
@@ -27589,7 +27595,11 @@
 				_react2['default'].createElement(
 					'div',
 					{ id: 'footer' },
-					_react2['default'].createElement('div', { className: 'contentContainer' })
+					_react2['default'].createElement(
+						'div',
+						{ className: 'contentContainer' },
+						this.props.version
+					)
 				)
 			);
 			/*
@@ -27599,10 +27609,12 @@
 	});
 
 	exports['default'] = (0, _reactRedux.connect)(function (state) {
+		var version = state.version;
 		var access_token = state.user.access_token;
 		var me = state.data.me;
 
 		var r = {
+			version: version,
 			access_token: access_token
 		};
 		if (me) {
