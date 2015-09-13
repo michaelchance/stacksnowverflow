@@ -7,21 +7,17 @@ function data(state={}, action){
 		type === ActionTypes.AUTH_COMPLETE ||
 		type === ActionTypes.LOGOUT){
 		
-		const {datapointer} = action;
-		let merge = {};
-		if(datapointer && state[datapointer]){
-			merge[datapointer] = Object.assign({},state[datapointer]);
-			merge[datapointer].expires = 0;
-			}
-		else if(!datapointer){
-			merge = Object.assign({},state);
-			Object.getOwnPropertyNames(merge).forEach(function(val, idx, array) {
+		merge = Object.assign({},state);
+		Object.getOwnPropertyNames(merge).forEach(function(val, idx, array) {
+			if(merge[val].auth){
+				delete merge[val]
+				delete state[val]
+				}
+			else {
 				merge[val].expires = 0;
-				});
-			}
-		else {
-			//datapointer provided, but no data existed.  Do nothing
-			}
+				}
+			});
+		return Object.assign({},state,merge);
 		}
 	else if(type === ActionTypes.API_REQUEST){
 		const {endpoint} = action;

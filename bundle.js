@@ -107,7 +107,7 @@
 	// const history = new HashHistory();
 	__webpack_require__(259);
 
-	var initialState = { version: "201509130925" };
+	var initialState = { version: "201509130929" };
 
 	var store = (0, _redux.applyMiddleware)(_reduxThunk2['default'], _apiMiddlewareJs2['default'], _reduxLogger2['default'])(_redux.createStore)(_reducersJs2['default'], initialState);
 
@@ -896,6 +896,7 @@
 
 						var expiresMinutes = action.expiresMinutes;
 						var datapointer = action.datapointer;
+						var auth = action.auth;
 
 						var fullUrl = endpoint.indexOf(API_ROOT) === -1 ? API_ROOT + endpoint : endpoint;
 
@@ -930,9 +931,9 @@
 								}
 								return json;
 							}).then(function (response) {
-								return next({ type: ActionTypes.API_RESPONSE, endpoint: endpoint, response: response, expiresMinutes: expiresMinutes, datapointer: datapointer });
+								return next({ type: ActionTypes.API_RESPONSE, endpoint: endpoint, response: response, expiresMinutes: expiresMinutes, datapointer: datapointer, auth: auth });
 							}, function (error) {
-								return next({ type: ActionTypes.API_ERROR, endpoint: endpoint, error: error, datapointer: datapointer });
+								return next({ type: ActionTypes.API_ERROR, endpoint: endpoint, error: error, datapointer: datapointer, auth: auth });
 							})
 						};
 					})();
@@ -1348,7 +1349,8 @@
 					type: API_REQUEST,
 					endpoint: endpoint,
 					expiresMinutes: expiresMinutes,
-					datapointer: datapointer
+					datapointer: datapointer,
+					auth: auth
 				});
 			}
 		};
@@ -1606,47 +1608,42 @@
 		var type = action.type;
 
 		if (type === ActionTypes.EXPIRE_DATA || type === ActionTypes.AUTH_COMPLETE || type === ActionTypes.LOGOUT) {
-			(function () {
-				var datapointer = action.datapointer;
 
-				var merge = {};
-				if (datapointer && state[datapointer]) {
-					merge[datapointer] = Object.assign({}, state[datapointer]);
-					merge[datapointer].expires = 0;
-				} else if (!datapointer) {
-					merge = Object.assign({}, state);
-					Object.getOwnPropertyNames(merge).forEach(function (val, idx, array) {
-						merge[val].expires = 0;
-					});
+			merge = Object.assign({}, state);
+			Object.getOwnPropertyNames(merge).forEach(function (val, idx, array) {
+				if (merge[val].auth) {
+					delete merge[val];
+					delete state[val];
 				} else {
-					//datapointer provided, but no data existed.  Do nothing
+					merge[val].expires = 0;
 				}
-			})();
+			});
+			return Object.assign({}, state, merge);
 		} else if (type === ActionTypes.API_REQUEST) {
-				var endpoint = action.endpoint;
-				var _action$datapointer = action.datapointer;
-				var datapointer = _action$datapointer === undefined ? endpoint : _action$datapointer;
+			var endpoint = action.endpoint;
+			var _action$datapointer = action.datapointer;
+			var datapointer = _action$datapointer === undefined ? endpoint : _action$datapointer;
 
-				return Object.assign({}, state, _defineProperty({}, datapointer, { IS_LOADING: true }));
-			} else if (type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR) {
-				var endpoint = action.endpoint;
-				var _action$expiresMinutes = action.expiresMinutes;
-				var expiresMinutes = _action$expiresMinutes === undefined ? 60 : _action$expiresMinutes;
-				var _action$datapointer2 = action.datapointer;
-				var datapointer = _action$datapointer2 === undefined ? endpoint : _action$datapointer2;
+			return Object.assign({}, state, _defineProperty({}, datapointer, { IS_LOADING: true }));
+		} else if (type === ActionTypes.API_RESPONSE || type === ActionTypes.API_ERROR) {
+			var endpoint = action.endpoint;
+			var _action$expiresMinutes = action.expiresMinutes;
+			var expiresMinutes = _action$expiresMinutes === undefined ? 60 : _action$expiresMinutes;
+			var _action$datapointer2 = action.datapointer;
+			var datapointer = _action$datapointer2 === undefined ? endpoint : _action$datapointer2;
 
-				if (type === ActionTypes.API_ERROR) {
-					var error = action.error;
+			if (type === ActionTypes.API_ERROR) {
+				var error = action.error;
 
-					error.expires = 0; //auto expire an error'd request, but put it in the state for display purposes
-					return Object.assign({}, state, _defineProperty({}, datapointer, error));
-				} else {
-					var response = action.response;
+				error.expires = 0; //auto expire an error'd request, but put it in the state for display purposes
+				return Object.assign({}, state, _defineProperty({}, datapointer, error));
+			} else {
+				var response = action.response;
 
-					response.expires = new Date().getTime() + expiresMinutes * 60 * 1000;
-					return Object.assign({}, state, _defineProperty({}, datapointer, response));
-				}
+				response.expires = new Date().getTime() + expiresMinutes * 60 * 1000;
+				return Object.assign({}, state, _defineProperty({}, datapointer, response));
 			}
+		}
 		return state;
 	}
 

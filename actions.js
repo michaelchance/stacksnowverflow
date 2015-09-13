@@ -27,7 +27,8 @@ export function loadDataFromApi(options){
 				type : API_REQUEST,
 				endpoint,
 				expiresMinutes,
-				datapointer
+				datapointer,
+				auth
 				});			
 			}
 		}

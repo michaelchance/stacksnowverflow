@@ -63,7 +63,7 @@ export default store => next => action => {
 		
 		next(action);
 
-		const {expiresMinutes,datapointer} = action;
+		const {expiresMinutes,datapointer,auth} = action;
 		
 		let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
 
@@ -89,8 +89,8 @@ export default store => next => action => {
 				return json
 				})
 			.then(
-				response => next({type:ActionTypes.API_RESPONSE, endpoint, response, expiresMinutes, datapointer}),
-				error => next({type:ActionTypes.API_ERROR, endpoint, error, datapointer})
+				response => next({type:ActionTypes.API_RESPONSE, endpoint, response, expiresMinutes, datapointer, auth}),
+				error => next({type:ActionTypes.API_ERROR, endpoint, error, datapointer, auth})
 				);
 		}
 	else {
