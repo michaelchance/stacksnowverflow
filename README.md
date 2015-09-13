@@ -20,7 +20,11 @@ I considered loading data on the fly and storing it in a global object, but it s
 choice was to use **Redux**.  Of all the Flux implementations I looked at, it seemed to be one of the most
 popular among people who sound smart, so I decided to give it a try.  It had a very steep learning curve, but
 once I learned its workflow and constructed middleware to handle Stack Exchange API requests, I found it
-very useful.  It allowed me to reliably fetch and cache Stack Exchange API requests and auth data, as well
+very useful.  
+
+The structure of the API middleware I used is based on the Redux "real-world" example they include
+in their [repo](https://github.com/rackt/redux/tree/master/examples/real-world).
+Redux allowed me to reliably fetch and cache Stack Exchange API requests and auth data, as well
 as use **react-redux** to bind my components to the store, as well as the lifecycle of the store.
 
 ## Limitations / bugs

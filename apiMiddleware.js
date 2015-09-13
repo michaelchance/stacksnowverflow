@@ -23,16 +23,6 @@ var initPromise = new Promise((resolve,reject)=>{
 		});
 	});
 	
-
-
-//		document.getElementById('login').addEventListener('click',function(){
-//			SE.authenticate({
-//				success: function(data){ console.log('success'); console.log(data); },
-//				error: function(data){ console.log('failure'); console.log(data); },
-//				networkUsers: true
-//				});
-//			});
-
 export default store => next => action => {
 	if(action.type === ActionTypes.AUTH_REQUEST){
 		return initPromise.then(()=>{

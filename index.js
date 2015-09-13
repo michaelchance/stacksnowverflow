@@ -28,8 +28,6 @@ const store = applyMiddleware(
 	loggerMiddleware
 	)(createStore)(rootReducer, initialState);
 
-var root = document.getElementById('root');
-
 React.render(
 	<Provider store={store}>
 		{()=>

@@ -39,7 +39,7 @@ var App = React.createClass({
 		},
 	
 	render (){
-		const {location,children} = this.props;
+		const {children} = this.props;
 		return (
 			<div>
 				<div id="navBar">
