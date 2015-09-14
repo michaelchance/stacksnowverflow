@@ -25,7 +25,7 @@ import ProfileFavoritesPage from './pages/favorites.js';
 import ProfileAnswersPage from './pages/answers.js';
 
 // const history = new HashHistory();
-const initialState = {version:"201509132034"};
+const initialState = {version:"201509141042"};
 
 const store = applyMiddleware(
 	thunkMiddleware,
