@@ -44,3 +44,6 @@ the popup is getting blocked.  In Chrome it seems to be ok.  Given more time I'd
 by putting the call to `window.SE.authenticate` directly in the click handler, but that
 would require a restructing of Redux actions and could take a while to figure out the "best"
 way to handle it.
+
+Upvoting, downvoting, and favoriting via the API seems to be broken
+http://stackoverflow.com/questions/32281960/option-preflight-to-stackexchange-api-responds-with-bad-request

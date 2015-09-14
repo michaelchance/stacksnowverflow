@@ -1,4 +1,36 @@
-import 'isomorphic-fetch';
+// Borrowed from http://www.html5rocks.com/en/tutorials/es6/promises/#toc-promisifying-xmlhttprequest
+// Then modified to provide requests of any HTTP method
+function http(method, url) {
+  // Return a new promise.
+  return new Promise(function(resolve, reject) {
+    // Do the usual XHR stuff
+    var req = new XMLHttpRequest();
+    req.open(method, url);
+
+    req.onload = function() {
+      // This is called even on 404 etc
+      // so check the status
+      if (req.status == 200) {
+        // Resolve the promise with the response text
+        resolve(req.response);
+      }
+      else {
+        // Otherwise reject with the status text
+        // which will hopefully be a meaningful error
+        reject(Error(req.statusText));
+      }
+    };
+
+    // Handle network errors
+    req.onerror = function() {
+      reject(Error("Network Error"));
+    };
+
+    // Make the request
+    req.send();
+  });
+}
+
 import * as ActionTypes from './actions.js';
 
 const API_ROOT = 'https://api.stackexchange.com/';
@@ -67,15 +99,27 @@ export default store => next => action => {
 		
 		fullUrl += "&key="+key;
 		
-		return fetch(fullUrl)
-			.then(response =>
-				response.json().then(json => ({json,response}))
-				)
-			.then(({json,response}) => {
+		var xhr = new XMLHttpRequest();
+		const {method='GET'} = action;
+		return http(method,fullUrl)
+			.then(response => {
+				// console.log('Response!');
+				// console.log(response);
+				try{
+					const json = JSON.parse(response);
+					// console.log('returning JSON');
+					return json;
+					}
+				catch(e){
+					return Promise.reject({error:response});
+					}
+				})
+			.then(json => {
 				// if(json.hasError)
 				if(json.error_id){
 					return Promise.reject(json);
 					}
+				// console.log('no error detected');
 				return json
 				})
 			.then(
