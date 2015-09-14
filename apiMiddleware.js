@@ -8,17 +8,18 @@ function http(method, url) {
     req.open(method, url);
 
     req.onload = function() {
+		//resolve with any status code
+		resolve(req.response);
       // This is called even on 404 etc
       // so check the status
-      if (req.status == 200) {
+      // if (req.status == 200) {
         // Resolve the promise with the response text
-        resolve(req.response);
-      }
-      else {
+      // }
+      // else {
         // Otherwise reject with the status text
         // which will hopefully be a meaningful error
-        reject(Error(req.statusText));
-      }
+        // reject(Error(req.statusText));
+      // }
     };
 
     // Handle network errors

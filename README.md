@@ -1,5 +1,7 @@
 ## Technical Choices
 
+#### Technology I used
+
 - **Style:** I blatantly stole the style, and many of the assets, of the Battle.net support page for this app.
 - **View:** React
 - **Model/Controller:** Redux
@@ -28,6 +30,14 @@ The structure of the API middleware I used is based on the Redux "real-world" ex
 in their [repo](https://github.com/rackt/redux/tree/master/examples/real-world).
 Redux allowed me to reliably fetch and cache Stack Exchange API requests and auth data, as well
 as use **react-redux** to bind my components to the store, as well as the lifecycle of the store.
+
+#### Other Choices
+
+I omitted question bodies in question list items (search, homepage).  I did this because question bodies are provided
+as HTML, and I know of no good/simple way to truncate HTML content for previewing, so I thought the title would be sufficient.
+
+Infinite scroll on question search was implemented using a "Load More" button to avoid the complexity of attaching
+to the browser scroll event.
 
 ## Limitations / bugs (Mostly in SE's authentication flow)
 

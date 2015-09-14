@@ -113,11 +113,11 @@ var SearchPage = React.createClass({
 							}
 					}()}
 				</div>
-				<div>
+				<div className="alignRight">
 					{() => {
 						if(this.props.has_more){
 							return (
-								<button onClick={this.increasePage}>Load More...</button>
+								<button className="blueButton" onClick={this.increasePage}>Load More...</button>
 								)
 							}
 						}()}

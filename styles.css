@@ -35,6 +35,24 @@ body{
 .floatLeft{float:left;}
 .floatRight{float:right;}
 .clear{clear:both}
+
+.alignLeft{text-align:left;}
+.alignRight{text-align:right;}
+.alignCenter{text-align:center;}
+
+.blueButton {
+	background: url("img/support-search-button.png") no-repeat; 
+	border: 0; 
+	color: #ffffff; 
+	font-size:15px;
+	height: 56px;
+	line-height: 54px;
+	width: 156px;
+	padding:0;
+	text-align:center;
+	cursor:pointer;
+}
+
 .contentContainer{
 	width: 990px;
 	margin: 0px auto;
@@ -193,7 +211,7 @@ body{
 	background: url("img/support-search-button.png") no-repeat scroll 0 0 transparent;
 	text-align: center;
 	font-size:15px;
-	line-height:56px;
+	line-height:54px;
 	padding:0px;
 	border:0px;
 }
@@ -216,6 +234,48 @@ body{
 	background: url("img/flame-bullet.png") no-repeat scroll 0 7px transparent;
 	text-indent:20px;
 }
+
+.questionListItem  .questionStats .score,
+.questionListItem  .questionStats .answers,
+.questionListItem  .questionStats .views {
+	padding: 5px;
+	margin: 5px;
+	border-radius:3px;
+	border:2px solid #0078AB;
+	text-align:center;
+	background:white;
+	color: #0078AB;
+	font-weight: bold;
+	display:inline-block;
+}
+
+.questionListItem .questionBody{ width: 70%;}
+.questionListItem .questionStats{ width: 28%; margin-right: 2%; text-align: right;}
+
+.questionListItem .questionBody,
+.questionListItem .questionStats {display:inline-block; vertical-align: top;}
+
+.questionListItem  .questionStats .stat { font-size: 18px; }
+.questionListItem  .questionStats .title { font-size: 12px; font-weight:normal;}
+
+.questionListItem a.questionLink { color:#4a4a4a; font-size:1.5em;}
+.questionListItem h3 {padding: 5px 0px; margin: 4px 0px;}
+.questionListItem a.questionLink:hover { color:#0078AB;}
+
+.questionListItem {margin-bottom: 20px; border-bottom: 1px solid #a4a4a4; padding-bottom: 6px;}
+.questionListItem .tags{font-size: .9em;}
+
+.tagLink, a.tagLink {
+	background: rgba(0,120,171,.7); 
+	border-radius: 3px; 
+	color:white; 
+	margin: 0px 5px; 
+	padding: 0px 8px;
+	border: 1px solid #0078AB;
+	display:inline-block;
+}
+
+.tagLink:hover, a.tagLink:hover { background:white; color: #0078AB; }
 
 #searchPage .searchForm {margin-bottom: 20px; text-align:center;}
 
