@@ -30,7 +30,7 @@ body{
 	padding:0px;
 	margin:0px;
 	color: #4a4a4a;
-    font: normal 12px/16px Arial, "Trebuchet MS", sans-serif;
+    font-family: Arial, "Trebuchet MS", sans-serif;
 }
 .floatLeft{float:left;}
 .floatRight{float:right;}
@@ -263,7 +263,7 @@ body{
 .questionListItem a.questionLink:hover { color:#0078AB;}
 
 .questionListItem {margin-bottom: 20px; border-bottom: 1px solid #a4a4a4; padding-bottom: 6px;}
-.questionListItem .tags{font-size: .9em;}
+.questionListItem .tags{font-size: .9em; padding-bottom: 4px;}
 
 .tagLink, a.tagLink {
 	background: rgba(0,120,171,.7); 
@@ -326,3 +326,4 @@ body{
 .postBodyContainer .postScoring .downvoteLink.active{background-position:-96px -456px;}
 .postBodyContainer .postScoring .favoriteLink{background-position:-168px -168px;}
 .postBodyContainer .postScoring .favoriteLink.active{background-position:-192px -168px;}
+.postBodyContainer .tags{ padding-bottom: 4px;}

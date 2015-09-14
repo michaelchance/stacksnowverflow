@@ -25,7 +25,6 @@ export default class QuestionListItem extends Component {
 						<Link className="questionLink" to={`/question/${this.props.question_id}`} dangerouslySetInnerHTML={()=>{return {__html:this.props.title};}()}></Link>
 					</h3>
 					<div className="tags">
-						<strong>Tags</strong>
 						{get(this.props,'tags',[]).map(tag=>{
 							return (
 								<Link className="tagLink" to={`/tags/${tag}`}>{tag}</Link>

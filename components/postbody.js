@@ -16,8 +16,7 @@ export default class PostBody extends Component {
 					<Link to="/" className={"favoriteLink "+(this.props.favorite ? "active" : "")} onClick={favoriteFunc}></Link>
 				</div>
 				<div className="postBody" dangerouslySetInnerHTML={()=>{return {__html:get(this.props,'body')};}()}></div>
-				<div>
-					<strong>Tags</strong>
+				<div className="tags">
 					{get(this.props,'tags',[]).map(tag=>{
 						return (
 							<Link className="tagLink" to={`/tags/${tag}`}>{tag}</Link>
