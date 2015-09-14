@@ -61,27 +61,26 @@ var QuestionPage = React.createClass({
 		},
 	render (){
 		return (
-			<div>
+			<div id="questionPage">
 				<div className="question borderBottom">
 					<h3 className="borderBottom" dangerouslySetInnerHTML={()=>{return {__html:get(this.props,'question.title')};}()}></h3>
 					<PostBody {...this.props.question} interact={this.interact} type="questions" id={get(this.props,'question.question_id')}/>
 				</div>
 				<div>
+					<h3 className="borderBottom">{get(this.props, 'answers.length') >= 0 ? "Answers" : ""}</h3>
+					<div>
 					{() => {
 						const answers = get(this.props, 'answers');
 						if(answers){	
 							return answers.map(answer =>{
-								return (
-									<div className="answer borderBottom">
-										<div dangerouslySetInnerHTML={()=>{return {__html:get(answer,'body')};}()}></div>
-									</div>
-									);
+								return (<PostBody className="answer borderBottom" {...answer} interact={this.interact} type="answers" id={get(answer,'answer_id')}/>);
 								});
 							}
 						else {
 							return "Loading...";
 							}
 						}()}
+					</div>
 				</div>
 			</div>
 			);

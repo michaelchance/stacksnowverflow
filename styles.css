@@ -39,6 +39,11 @@ body{
 	width: 990px;
 	margin: 0px auto;
 }
+
+.borderBottom{
+	border-bottom: 1px solid #0078AB;
+}
+
 #navBar {
 	background: rgba(255,255,255,.05);
 	border:1px solid rgba(255,255,255,.07);
@@ -213,3 +218,51 @@ body{
 }
 
 #searchPage .searchForm {margin-bottom: 20px; text-align:center;}
+
+#questionPage h3 {font-size: 1.5em; height:auto; padding:15px 0px;}
+
+#questionPage .question, #questionPage .answer { margin-bottom: 20px;}
+
+.postBodyContainer .postScoring{
+	width: 5%;
+	margin-right: 2%;
+	display:inline-block;
+	vertical-align:top;
+}
+.postBodyContainer .postBody{
+	width: 93%;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.postBodyContainer .postScoring .score{
+	width:24px;
+	height:24px;
+	padding: 5px;
+	margin: 5px;
+	border-radius:3px;
+	border:2px solid #0078AB;
+	text-align:center;
+	background:white;
+	color: #0078AB;
+	line-height:24px;
+	font-weight: bold;
+}
+
+.postBodyContainer .postScoring .upvoteLink,
+.postBodyContainer .postScoring .downvoteLink,
+.postBodyContainer .postScoring .favoriteLink {
+	display:block;
+	overflow:hidden;
+	width:24px;
+	height:24px;
+	margin:12px;
+	background:url("img/sprite-24-blue.png") no-repeat;
+}
+
+.postBodyContainer .postScoring .upvoteLink{background-position:-120px -384px;}
+.postBodyContainer .postScoring .upvoteLink.active{background-position:-120px -456px;}
+.postBodyContainer .postScoring .downvoteLink{background-position:-96px -384px;}
+.postBodyContainer .postScoring .downvoteLink.active{background-position:-96px -456px;}
+.postBodyContainer .postScoring .favoriteLink{background-position:-168px -168px;}
+.postBodyContainer .postScoring .favoriteLink.active{background-position:-192px -168px;}

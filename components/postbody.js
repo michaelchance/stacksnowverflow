@@ -8,14 +8,14 @@ export default class PostBody extends Component {
 		const downvoteFunc = this.props.interact((this.downvote ? "downvote/undo" : "downvote"), this.props.type, this.props.id);
 		const favoriteFunc = this.props.interact((this.favorite ? "favorite/undo" : "favorite"), this.props.type, this.props.id);
 		return (
-			<div className="postBody">
+			<div className={"postBodyContainer "+this.props.className}>
 				<div className="postScoring">
-					<Link to="/" className={"upvoteLink sprite "+(this.props.upvote ? "active" : "")} onClick={upvoteFunc}>upvote</Link>
-					<div>{this.props.score}</div>
-					<div></div>
-					<div></div>
+					<Link to="/" className={"upvoteLink "+(this.props.upvote ? "active" : "")} onClick={upvoteFunc}></Link>
+					<div className="score">{this.props.score}</div>
+					<Link to="/" className={"downvoteLink "+(this.props.downvote ? "active" : "")} onClick={downvoteFunc}></Link>
+					<Link to="/" className={"favoriteLink "+(this.props.favorite ? "active" : "")} onClick={favoriteFunc}></Link>
 				</div>
-				<div dangerouslySetInnerHTML={()=>{return {__html:get(this.props,'body')};}()}></div>
+				<div className="postBody" dangerouslySetInnerHTML={()=>{return {__html:get(this.props,'body')};}()}></div>
 			</div>
 			);
 			/*
