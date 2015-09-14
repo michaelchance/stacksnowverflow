@@ -76,8 +76,8 @@ var ProfilePage = React.createClass({
 					<div id="profileStats" className="floatRight">
 						<div>
 							<div className="displayInlineBlock profileMetric">
-								<div className="metric">{get(this.props, "me.reputation")}</div>
-								<div className="title">reputation</div>
+								<div className="metric alignCenter">{get(this.props, "me.reputation")}</div>
+								<div className="title alignCenter">reputation</div>
 							</div>
 							<div className="displayInlineBlock profileMetric">
 								<div className="metric alignCenter">{get(this.props, "me.answer_count")}</div>
