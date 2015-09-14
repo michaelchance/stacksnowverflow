@@ -16,7 +16,7 @@ var ProfileAnswersPage = React.createClass({
 		setTimeout(()=>{
 			for(let i = 1; i <= this.state.page; i++){
 				props.loadDataFromApi({
-					endpoint : `users/838992/answers?page=${i}&filter=withbody`,
+					endpoint : `me/answers?page=${i}&filter=withbody`,
 					datapointer : `me|answers|${i}`
 					});
 				}

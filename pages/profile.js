@@ -22,7 +22,7 @@ var ProfilePage = React.createClass({
 			setTimeout(()=>{
 				for(let i = 1; i <= this.state.page; i++){
 					props.loadDataFromApi({
-						endpoint : `users/838992/badges?page=${i}&filter=${badgefilter}`,
+						endpoint : `me/badges?page=${i}&filter=${badgefilter}`,
 						datapointer : `me|badges|${i}`
 						});
 					}

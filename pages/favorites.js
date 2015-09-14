@@ -18,7 +18,7 @@ var ProfileFavoritesPage = React.createClass({
 		setTimeout(()=>{
 			for(let i = 1; i <= this.state.page; i++){
 				props.loadDataFromApi({
-					endpoint : `users/838992/favorites?page=${i}`,
+					endpoint : `me/favorites?page=${i}`,
 					datapointer : `me|favorites|${i}`
 					});
 				}

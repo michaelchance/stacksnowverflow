@@ -17,7 +17,7 @@ var ProfileContainer = React.createClass({
 		const {userfilter} = props;
 		if(userfilter){
 			props.loadDataFromApi({
-				endpoint : `users/838992?filter=${userfilter}`,
+				endpoint : `me?filter=${userfilter}`,
 				datapointer : "me|profile"
 				});
 			}
