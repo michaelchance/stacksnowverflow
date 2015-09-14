@@ -204,7 +204,27 @@ a:hover { color:#a4a4a4;}
 
 #footer{
 	background:#040404 url("img/bg-top.jpg") 50% 70% no-repeat;
+	min-height: 300px;
 }
+
+#footerContentContainer{padding-top:80px;}
+#footerLinks { 
+	padding-top: 8px;
+	padding-left: 30px;
+	vertical-align: top; 
+	font-family: "Blizzard", "Arial", "Helvetica", sans-serif;
+}
+#footer #footerLinks a{
+	font-size:13px;
+	text-transform:uppercase;
+	color:rgba(255, 255, 255, 0.7);
+	text-decoration: none;
+	transition: text-shadow 160ms ease, color 160ms ease;
+}
+#footer #footerLinks a:hover{ color:white;}
+#footer #footerLinks > span{ margin: 0px 5px; color: rgba(255,255,255,.3);}
+
+#footer .copyright{padding: 8px 0px; color:rgba(255,255,255,.3); font-size:12px;}
 
 #homeSearchForm{margin-bottom: 20px;}
 .searchForm input.search{

@@ -91,7 +91,25 @@ var App = React.createClass({
 				</div>
 				<div id="footer">
 					<div className="contentContainer">
-					{this.props.version}
+						<div id="footerContentContainer">
+							<a className="logo-link" href="http://us.blizzard.com/">
+								<img className="blizzard-logo" src="img/blizzard.png"/>
+							</a>
+							<div xmlns="http://www.w3.org/1999/xhtml" id="footerLinks" className="displayInlineBlock">
+								<a className="nav-item nav-a" href="http://jobs.blizzard.com/" data-analytics="global-nav" data-analytics-placement="Footer - Careers">Careers</a>
+								<span>|</span>
+								<a className="nav-item nav-a" href="http://us.blizzard.com/company/about/" data-analytics="global-nav" data-analytics-placement="Footer - About">About</a>
+								<span>|</span>
+								<a className="nav-item nav-a" href="http://us.blizzard.com/company/about/privacy.html" data-analytics="global-nav" data-analytics-placement="Footer - Privacy">Privacy</a>
+								<span>|</span>
+								<a className="nav-item nav-a" href="http://us.blizzard.com/company/legal/" data-analytics="global-nav" data-analytics-placement="Footer - Terms">Terms</a>
+								<span>|</span>
+								<a className="nav-item nav-a" href="//dev.battle.net" data-analytics="global-nav" data-analytics-placement="Footer - API">API</a>
+								<div className="copyright">
+									<span dangerouslySetInnerHTML={()=>{return {__html:"&copy;"};}()}/>2015 Blizzard Entertainment, Inc.
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
