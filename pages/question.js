@@ -43,9 +43,9 @@ var QuestionPage = React.createClass({
 			// console.log(type);
 			// console.log(id);
 			let req = { 
-				endpoint:`${type}/${id}/${interaction}`,
-				auth:true,
-				method:'POST'
+				endpoint:`${type}/${id}/${interaction}?filter=default&preview=false`,
+				datapointer:`${type}/${id}/${interaction}`,
+				auth:true
 				}
 			if(interaction.indexOf('undo') >= 0){
 				const i = interaction.split('/')[0]; // upvote/undo => upvote
