@@ -88,6 +88,10 @@ export default store => next => action => {
 
 		const {expiresMinutes,datapointer,auth} = action;
 		
+		if(endpoint.indexOf('/') == 0){
+			endpoint = endpoint.substr(1);
+			}
+		
 		let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
 
 		if(fullUrl.indexOf('?') >= 0){fullUrl += "&";}

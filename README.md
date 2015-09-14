@@ -36,10 +36,13 @@ as use **react-redux** to bind my components to the store, as well as the lifecy
 I omitted question bodies in question list items (search, homepage).  I did this because question bodies are provided
 as HTML, and I know of no good/simple way to truncate HTML content for previewing, so I thought the title would be sufficient.
 
-Infinite scroll on question search was implemented using a "Load More" button to avoid the complexity of attaching
+Infinite scroll on various components was implemented using a "Load More" button to avoid the complexity of attaching
 to the browser scroll event.
 
-## Limitations / bugs (Mostly in SE's authentication flow)
+Most `pagesize`s for infinite scroll were left at default, but the tags page was limited to 20, due to the need to call /tags/{ids}/wikis, which
+is limited to 20 tags per call
+
+## Limitations / bugs
 
 #### Auth Flow
 

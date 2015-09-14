@@ -19,6 +19,12 @@ import QuestionPage from './pages/question.js';
 import TagListingPage from './pages/taglisting.js';
 import TagDetailPage from './pages/tagdetail.js';
 
+import ProfileContainer from './pages/profilecontainer.js';
+import ProfilePage from './pages/profile.js';
+import ProfileBadgesPage from './pages/badges.js';
+import ProfileFavoritesPage from './pages/favorites.js';
+import ProfileAnswersPage from './pages/answers.js';
+
 // const history = new HashHistory();
 const initialState = {version:"201509132034"};
 
@@ -37,15 +43,15 @@ React.render(
 					<Route path="/search" component={SearchPage}/>
 					<Route path="/question/:id" component={QuestionPage}/>
 					<Route path="/tags" component={TagListingPage}/>
-					<Route path="/tags/:id" component={TagDetailPage}/>
+					<Route path="/tags/:tag" component={TagDetailPage}/>
+					<Route path="/profile" component={ProfileContainer}>
+						<IndexRoute component={ProfilePage}/>
+						<Route path="badges" component={ProfileBadgesPage}/>
+						<Route path="favorites" component={ProfileFavoritesPage}/>
+						<Route path="answers" component={ProfileAnswersPage}/>
+					</Route>
 				</Route>
 			</Router>
 		}
 	</Provider>,
 	document.getElementById('root'));
-/*
-					<Route path="/profile" component={ProfilePage}/>
-					<Route path="/profile/badges" component={ProfileBadgesPage}/>
-					<Route path="/profile/favorites" component={ProfileFavoritesPage}/>
-					<Route path="/profile/answers" component={ProfileAnswersPage}/>
-*/
