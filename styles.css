@@ -42,6 +42,9 @@ body{
 
 .displayInlineBlock{display:inline-block;}
 
+a { color:#0078AB;}
+a:hover { color:#a4a4a4;}
+
 .sprite{
 	overflow:hidden;
 	width:24px;
