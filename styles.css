@@ -454,6 +454,9 @@ a.questionLink:hover { color:#0078AB;}
 	margin-bottom: 16px;	
 }
 
+.profileMetric { margin-right: 8px;}
+.profileMetric .metric{ font-weight:bold; }
+
 #profileStats .sprite {margin-right:4px;}
 
 #profileStats .sprite.location{ background-position: -48px -288px;}
