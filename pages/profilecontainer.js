@@ -34,7 +34,6 @@ var ProfileContainer = React.createClass({
 			<div>
 				<div id="profileLinks" className="alignRight">
 					<Link className="profileLink" activeClassName="active" onlyActiveOnIndex={true} to="/profile" className="profileLink">My Profile</Link>
-					<Link className="profileLink" activeClassName="active" to="/profile/badges" className="profileLink">My Badges</Link>
 					<Link className="profileLink" activeClassName="active" to="/profile/favorites" className="profileLink">My Favorites</Link>
 					<Link className="profileLink" activeClassName="active" to="/profile/answers" className="profileLink">My Answers</Link>
 				</div>

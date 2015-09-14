@@ -392,20 +392,35 @@ a.questionLink:hover { color:#0078AB;}
 	margin: 3px;
 }
 
-#portraitBadges .badgeIcon {
+.badgeIcon {
 	width: 8px;
 	height: 8px;
 	display:inline-block;
 	margin-right: 4px;
 	border-radius:4px;
 }
+.gold .badgeIcon{ background: #ffcc00;}
+.silver .badgeIcon{ background: #c5c5c5;}
+.bronze .badgeIcon{ background: #cc9966;}
+
+.badgePlate{
+	line-height: 12px;
+	font-size: 12px;
+	padding: 4px 4px;
+	border-radius: 3px;
+	margin: 3px;
+	background: rgba(0,120,171,.4);
+	border: 1px solid #0078AB;
+}
+
+.badgePlate .badgeName{margin-right: 4px;}
+
+.badgePlateContainer {width: 12%; margin-right:1%;}
+.badgeDescription { width: 87%;}
 
 #portraitBadges .gold {background: #fff8e2;border: 1px solid #ece3c8;}
-#portraitBadges .gold .badgeIcon{ background: #ffcc00;}
 #portraitBadges .silver {background: #edeeef;border: 1px solid #e0e1e3;}
-#portraitBadges .silver .badgeIcon{ background: #c5c5c5;}
 #portraitBadges .bronze {background: #f9ebe1;border: 1px solid #f1decc;}
-#portraitBadges .bronze .badgeIcon{ background: #cc9966;}
 
 #profileStats {
 	padding: 16px;

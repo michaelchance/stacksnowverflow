@@ -21,7 +21,6 @@ import TagDetailPage from './pages/tagdetail.js';
 
 import ProfileContainer from './pages/profilecontainer.js';
 import ProfilePage from './pages/profile.js';
-import ProfileBadgesPage from './pages/badges.js';
 import ProfileFavoritesPage from './pages/favorites.js';
 import ProfileAnswersPage from './pages/answers.js';
 
@@ -46,7 +45,6 @@ React.render(
 					<Route path="/tags/:tag" component={TagDetailPage}/>
 					<Route path="/profile" component={ProfileContainer}>
 						<IndexRoute component={ProfilePage}/>
-						<Route path="badges" component={ProfileBadgesPage}/>
 						<Route path="favorites" component={ProfileFavoritesPage}/>
 						<Route path="answers" component={ProfileAnswersPage}/>
 					</Route>
