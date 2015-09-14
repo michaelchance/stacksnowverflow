@@ -6,6 +6,8 @@
 - **Additional:** 
 	- **react-redux** is used for binding React components to the Redux store
 	- **react-router** is used to control navigation around the site, and loading the appropriate React components 
+	- **redux-thunk** redux middleware for processing actions at a later time.  Used for the lazy construction of API requests to be passed to api middleware based on cache expiry and other factors
+	- **redux-logger** redux middleware for logging actions.  Absolutely indispensable.
 	- **webpack with babel-loader** these packages were used so that I could leverage ES6 and native JSX code, and transpile+minify to ES5 for the browser
 
 I chose to use **React** for this project as a view because I wanted to learn more about the workflow
