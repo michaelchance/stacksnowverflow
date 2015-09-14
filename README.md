@@ -31,6 +31,8 @@ as use **react-redux** to bind my components to the store, as well as the lifecy
 
 ## Limitations / bugs (Mostly in SE's authentication flow)
 
+#### Auth Flow
+
 The Stack Exchange API, and Javascript SDK especially, do NOT work in local testing, which
 was a significant challenge.  In addition, even running a local web server, and creating an app
 at stackapps with a domain of "localhost" seemed to break the authentication flow, and the
@@ -47,6 +49,8 @@ by putting the call to `window.SE.authenticate` directly in the click handler, b
 would require a restructing of Redux actions and could take a while to figure out the "best"
 way to handle it.
 
+#### Upvoting/downvoting/favoriting
+
 Upvoting, downvoting, and favoriting via the API seems to be broken, as per:
 
 http://stackoverflow.com/questions/32281960/option-preflight-to-stackexchange-api-responds-with-bad-request
@@ -56,3 +60,5 @@ Whenever sending an upvote/downvote/favorite request, the following error is rec
 {"error_id":404,"error_message":"this method cannot be called this way","error_name":"no_method"}
 
 Sending as a POST seems to have no effect.
+
+However, if the api starts working, the icons are set up to fill in their colors, using a sprite sheet from battle.net
