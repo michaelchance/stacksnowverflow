@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 
 function data(state={}, action){
 	const {type} = action;
-	if(type === ActionTypes.EXPIRE_DATA ||
+	if((type === ActionTypes.EXPIRE_DATA && !action.datapointer)||
 		type === ActionTypes.AUTH_COMPLETE ||
 		type === ActionTypes.LOGOUT){
 		
@@ -17,6 +17,18 @@ function data(state={}, action){
 				merge[val].expires = 0;
 				}
 			});
+		return Object.assign({},state,merge);
+		}
+	else if(type === ActionTypes.EXPIRE_DATA && action.datapointer){
+		let merge = Object.assign({},state);
+		const {datapointer} = action;
+		if(merge[datapointer].auth){
+			delete merge[datapointer]
+			delete state[datapointer]
+			}
+		else {
+			merge[datapointer].expires = 0;
+			}
 		return Object.assign({},state,merge);
 		}
 	else if(type === ActionTypes.API_REQUEST){

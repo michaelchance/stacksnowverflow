@@ -1,3 +1,27 @@
+@font-face {
+	font-family: "Blizzard";
+	font-style: normal;
+	font-weight: 300;
+	src: local("Blizzard Light"), local("Blizzard-Light"), url("blizzard-light.woff") format("woff");
+}
+@font-face {
+	font-family: "Blizzard";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Blizzard"), local("Blizzard"), url("blizzard-regular.woff") format("woff");
+}
+@font-face {
+	font-family: "Blizzard";
+	font-style: italic;
+	font-weight: 400;
+	src: local("Blizzard Italic"), local("Blizzard-Italic"), url("blizzard-regular-italic.woff") format("woff");
+}
+@font-face {
+	font-family: "Blizzard";
+	font-style: normal;
+	font-weight: 700;
+	src: local("Blizzard Bold"), local("Blizzard-Bold"), url("blizzard-bold.woff") format("woff");
+}
 /*
 	#0078AB
 */
@@ -15,20 +39,23 @@ body{
 	width: 990px;
 	margin: 0px auto;
 }
-
 #navBar {
 	background: rgba(255,255,255,.05);
 	border:1px solid rgba(255,255,255,.07);
 	color:white;
 	height:60px;
-	font-size:20px;
-	line-height:60px;
+	font-size:17px;
+	font-weight:bold;
+	line-height:60px;    
 }
 #navBar .contentContainer{ max-width: 1120px; width: auto;}
 #navBar a {
 	display: inline-block;
 	padding: 0px 23px;
 	color:rgba(255,255,255,.7);
+	-webkit-transition: text-shadow 160ms ease, color 160ms ease;
+    transition: text-shadow 160ms ease, color 160ms ease;
+	font-family: "Blizzard", "Arial", "Helvetica", sans-serif;
 }
 #navBar a:hover {
 	color:white;

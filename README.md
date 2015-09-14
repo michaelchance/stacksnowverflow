@@ -27,12 +27,13 @@ in their [repo](https://github.com/rackt/redux/tree/master/examples/real-world).
 Redux allowed me to reliably fetch and cache Stack Exchange API requests and auth data, as well
 as use **react-redux** to bind my components to the store, as well as the lifecycle of the store.
 
-## Limitations / bugs
+## Limitations / bugs (Mostly in SE's authentication flow)
 
 The Stack Exchange API, and Javascript SDK especially, do NOT work in local testing, which
 was a significant challenge.  In addition, even running a local web server, and creating an app
-at stackapps with a domain of "localhost" seemed to break the authentication flow.  This forced
-me to do most of my authenticated page testing by pushing to github.
+at stackapps with a domain of "localhost" seemed to break the authentication flow, and the
+popup would hang on the return URL without calling the callback in the original window.  This 
+forced me to do most of my authenticated page testing by pushing to github and waiting for a refresh.
 
 There is a bug in the stack exchange API that I ran into:
 http://stackapps.com/questions/3631/bug-in-the-stackexchange-api-getting-could-not-parse-proxy-url-when-user-not
