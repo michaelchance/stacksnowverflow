@@ -86,7 +86,7 @@ export default store => next => action => {
 		
 		next(action);
 
-		const {expiresMinutes,datapointer,auth} = action;
+		const {expiresMinutes,datapointer,auth,nosite} = action;
 		
 		if(endpoint.indexOf('/') == 0){
 			endpoint = endpoint.substr(1);
@@ -96,13 +96,15 @@ export default store => next => action => {
 
 		if(fullUrl.indexOf('?') >= 0){fullUrl += "&";}
 		else {fullUrl += "?";}
+		fullUrl += "key="+key;
 		
-		fullUrl += "site=www.stackoverflow.com";
+		if(!nosite){
+			fullUrl += "&site=www.stackoverflow.com";
+			}
 		
 		const {access_token} = store.getState().user;
 		if(access_token){ fullUrl += "&access_token="+access_token; }
 		
-		fullUrl += "&key="+key;
 		
 		var xhr = new XMLHttpRequest();
 		const {method='GET'} = action;

@@ -77,6 +77,9 @@ var App = React.createClass({
 							<Link activeClassName="active" onlyActiveOnIndex={true} to="/">Home<span className="indicator"/></Link>
 							<Link activeClassName="active" to="/search">Search<span className="indicator"/></Link>
 							<Link activeClassName="active" to="/tags">Tags<span className="indicator"/></Link>
+							{ this.props.me ? 
+								(<Link activeClassName="active" to="/profile">Profile<span className="indicator"/></Link>)
+								: ""}
 						</div>
 					</div>
 					<div className="clear"/>

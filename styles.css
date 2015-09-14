@@ -40,6 +40,15 @@ body{
 .alignRight{text-align:right;}
 .alignCenter{text-align:center;}
 
+.displayInlineBlock{display:inline-block;}
+
+.sprite{
+	overflow:hidden;
+	width:24px;
+	height:24px;
+	background:url("img/sprite-24-blue.png") no-repeat;
+}
+
 .blueButton {
 	background: url("img/support-search-button.png") no-repeat; 
 	border: 0; 
@@ -219,6 +228,7 @@ body{
 	width: 640px;
 	margin:0px auto;
 }
+
 .heading {
 	color:black;
 	border-bottom: 3px solid #AFADAC;
@@ -258,9 +268,10 @@ body{
 .questionListItem  .questionStats .stat { font-size: 18px; }
 .questionListItem  .questionStats .title { font-size: 12px; font-weight:normal;}
 
-.questionListItem a.questionLink { color:#4a4a4a; font-size:1.5em;}
+a.questionLink { color:#4a4a4a; font-size:1.5em;}
+a.questionLink:hover { color:#0078AB;}
+
 .questionListItem h3 {padding: 5px 0px; margin: 4px 0px;}
-.questionListItem a.questionLink:hover { color:#0078AB;}
 
 .questionListItem {margin-bottom: 20px; border-bottom: 1px solid #a4a4a4; padding-bottom: 6px;}
 .questionListItem .tags{font-size: .9em; padding-bottom: 4px;}
@@ -312,11 +323,11 @@ body{
 .postBodyContainer .postScoring .upvoteLink,
 .postBodyContainer .postScoring .downvoteLink,
 .postBodyContainer .postScoring .favoriteLink {
+	margin:12px;
 	display:block;
 	overflow:hidden;
 	width:24px;
 	height:24px;
-	margin:12px;
 	background:url("img/sprite-24-blue.png") no-repeat;
 }
 
@@ -339,3 +350,81 @@ body{
 	margin:20px 1%;
 	padding: 12px 1%;
 }
+
+#profileLinks .profileLink,
+#profileLinks a.profileLink { 
+	color: black;
+	font-weight:bold;
+	display:inline-block;
+	height: 32px;
+	margin: 0px 8px;
+	padding: 0px 16px;
+	line-height:32px;
+	border-radius: 3px;
+}
+
+#profileLinks .profileLink.active,
+#profileLinks .profileLink.active:hover,
+#profileLinks a.profileLink.active,
+#profileLinks a.profileLink.active:hover{ color:#ffffff; background: #0078AB;}
+
+#profileLinks .profileLink:hover,
+#profileLinks a.profileLink:hover { color:#0078AB; }
+
+#portraitBox { 
+	padding: 16px; 
+	border-radius: 3px;
+	border:1px solid #0078AB;
+	margin-right: 16px;
+	margin-bottom: 16px;
+}
+
+#portraitBadges{
+	width: 80%;
+	margin: 0px auto;
+}
+
+#portraitBadges .badgeCountContainer {
+	line-height: 12px;
+	font-size: 12px;
+	padding: 4px 4px;
+	border-radius: 3px;
+	margin: 3px;
+}
+
+#portraitBadges .badgeIcon {
+	width: 8px;
+	height: 8px;
+	display:inline-block;
+	margin-right: 4px;
+	border-radius:4px;
+}
+
+#portraitBadges .gold {background: #fff8e2;border: 1px solid #ece3c8;}
+#portraitBadges .gold .badgeIcon{ background: #ffcc00;}
+#portraitBadges .silver {background: #edeeef;border: 1px solid #e0e1e3;}
+#portraitBadges .silver .badgeIcon{ background: #c5c5c5;}
+#portraitBadges .bronze {background: #f9ebe1;border: 1px solid #f1decc;}
+#portraitBadges .bronze .badgeIcon{ background: #cc9966;}
+
+#profileStats {
+	padding: 16px;
+	width: 200px;
+	border-radius: 3px;
+	border: 1px solid #0078AB;
+	margin-left: 16px;
+	margin-bottom: 16px;	
+}
+
+#profileStats .sprite {margin-right:4px;}
+
+#profileStats .sprite.location{ background-position: -48px -288px;}
+#profileStats .sprite.link{ background-position: -216px -72px;}
+#profileStats .sprite.joined{ background-position: -24px -384px;}
+#profileStats .sprite.views{ background-position: -192px -360px;}
+
+#profileStats .profileInfoLine{ line-height: 24px; height:24px;}
+#profileStats .profileInfoLine > span,
+#profileStats .profileInfoLine > a{ vertical-align: top;}
+
+h3.myAnswer { font-size: 18px;}

@@ -6,7 +6,7 @@ export const API_ERROR = "API_ERROR";
 export function loadDataFromApi(options){
 	// console.log('Loading Data from Api');
 	const {endpoint, expiresMinutes} = options
-	const {datapointer=endpoint, forceExpire, auth, method} = options
+	const {datapointer=endpoint, forceExpire, auth, method, nosite} = options
 	return (dispatch, getState) => {
 		const data = getState().data[datapointer]
 		const access_token = getState().user.access_token;
@@ -34,7 +34,8 @@ export function loadDataFromApi(options){
 				expiresMinutes,
 				datapointer,
 				auth,
-				method
+				method,
+				nosite
 				});			
 			}
 		}

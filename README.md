@@ -42,6 +42,8 @@ to the browser scroll event.
 Most `pagesize`s for infinite scroll were left at default, but the tags page was limited to 20, due to the need to call /tags/{ids}/wikis, which
 is limited to 20 tags per call
 
+The object `get` method from `lodash` quickly became indispensable.
+
 ## Limitations / bugs
 
 #### Auth Flow

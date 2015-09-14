@@ -6,12 +6,13 @@ import {Link,History} from 'react-router';
 
 import {loadDataFromApi} from '../actions.js';
 
-var QuestionPage = React.createClass({
-	getInitialState : function(){
-		return {page:1};
-		},
+var ProfileBadgesPage = React.createClass({
 	mixins : [History],
 	loadData(props,forceExpire){
+		props.loadDataFromApi({
+			endpoint : "users/838992/badges",
+			datapointer : "me|badges"
+			});
 		},
 	componentWillMount(){
 		this.loadData(this.props);
@@ -32,6 +33,6 @@ export default connect(
 		return {};
 		},
 	{ loadDataFromApi }
-	)(QuestionPage);
+	)(ProfileBadgesPage);
 	
 
