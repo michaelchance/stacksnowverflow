@@ -327,3 +327,15 @@ body{
 .postBodyContainer .postScoring .favoriteLink{background-position:-168px -168px;}
 .postBodyContainer .postScoring .favoriteLink.active{background-position:-192px -168px;}
 .postBodyContainer .tags{ padding-bottom: 4px;}
+
+.tagListing {
+	border-radius: 4px;
+	border:2px solid #0078AB;
+	background:white;
+	height: 192px;
+	display:inline-block;
+	overflow:hidden;
+	width: 20%;
+	margin:20px 1%;
+	padding: 12px 1%;
+}

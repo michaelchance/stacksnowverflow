@@ -10,7 +10,7 @@ import {loadDataFromApi,expireData} from '../actions.js';
 
 var QuestionPage = React.createClass({
 	getInitialState : function(){
-		return {page:1};
+		return {};
 		},
 	mixins : [History],
 	loadData(props,forceExpire){

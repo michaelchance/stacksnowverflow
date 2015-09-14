@@ -4,7 +4,7 @@ export const API_ERROR = "API_ERROR";
 
 //Require redux-thunk middleware
 export function loadDataFromApi(options){
-	console.log('Loading Data from Api');
+	// console.log('Loading Data from Api');
 	const {endpoint, expiresMinutes} = options
 	const {datapointer=endpoint, forceExpire, auth, method} = options
 	return (dispatch, getState) => {

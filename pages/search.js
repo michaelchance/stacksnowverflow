@@ -14,19 +14,20 @@ var SearchPage = React.createClass({
 		},
 	mixins : [History],
 	loadData(props,forceExpire){
-		console.log('SEARCH LOADDATA '+this.state.page);
+		// console.log('SEARCH LOADDATA '+this.state.page);
 		let q = get(props, "location.query.q");
 		let sort = get(props, "location.query.sort") || "relevance";
 		if(q){
 			q = encodeURIComponent(q);
 			sort = encodeURIComponent(sort);
-			console.log('Q');
-			console.log(q);
+			// console.log('Q');
+			// console.log(q);
 			if(this.refs && this.refs.q){
 				findDOMNode(this.refs.q).value = q;
 				}
 			if(!this.state.q){ this.setState({q}); }
 			else if(this.state.q != q) { this.setState({q, page:1}); }
+			//in timeout to allow state to be set
 			setTimeout(()=>{
 				for(let i = 1; i <= this.state.page; i++){
 					props.loadDataFromApi({
@@ -39,12 +40,12 @@ var SearchPage = React.createClass({
 		//props.loadDataFromApi('questions');
 		},
 	componentWillMount(){
-		console.log('SEARCH WILLMOUNT');
+		// console.log('SEARCH WILLMOUNT');
 		this.setState({page:1});
 		this.loadData(this.props);
 		},
 	componentWillReceiveProps(nextProps){
-		console.log('SEARCH WILLRECEIVEPROPS');
+		// console.log('SEARCH WILLRECEIVEPROPS');
 		this.loadData(nextProps);
 		},
 	setSort(){
@@ -69,11 +70,11 @@ var SearchPage = React.createClass({
 			}
 		},
 	increasePage(){
-		console.log('setting page');
+		// console.log('setting page');
 		const n = {
 			page:this.state.page+1
 			}
-		console.log(n);
+		// console.log(n);
 		this.setState(n);
 		this.loadData(this.props);
 		},
