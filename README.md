@@ -47,5 +47,12 @@ by putting the call to `window.SE.authenticate` directly in the click handler, b
 would require a restructing of Redux actions and could take a while to figure out the "best"
 way to handle it.
 
-Upvoting, downvoting, and favoriting via the API seems to be broken
+Upvoting, downvoting, and favoriting via the API seems to be broken, as per:
+
 http://stackoverflow.com/questions/32281960/option-preflight-to-stackexchange-api-responds-with-bad-request
+
+Whenever sending an upvote/downvote/favorite request, the following error is received.
+
+{"error_id":404,"error_message":"this method cannot be called this way","error_name":"no_method"}
+
+Sending as a POST seems to have no effect.
