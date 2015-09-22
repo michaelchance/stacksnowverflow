@@ -44,7 +44,6 @@ React.render(
 					<Route path="/tags" component={TagListingPage}/>
 					<Route path="/tags/:tag" component={TagDetailPage}/>
 					<Route path="/profile" component={ProfileContainer}>
-						<IndexRoute component={ProfilePage}/>
 						<Route path="favorites" component={ProfileFavoritesPage}/>
 						<Route path="answers" component={ProfileAnswersPage}/>
 					</Route>
